@@ -31,8 +31,8 @@ class StockRequestOrder(models.Model):
         )
 
     picking_type_id = fields.Many2one(
-        "stock.picking.type",
-        "Operation Type",
+        comodel_name="stock.picking.type",
+        string="Operation Type",
         default=_get_default_picking_type,
         required=True,
     )
