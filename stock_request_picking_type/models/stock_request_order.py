@@ -14,6 +14,7 @@ class StockRequestOrder(models.Model):
             .search(
                 [
                     ("code", "=", "stock_request_order"),
+                    "|",
                     (
                         "warehouse_id.company_id",
                         "in",
@@ -24,6 +25,7 @@ class StockRequestOrder(models.Model):
                             False,
                         ],
                     ),
+                    ("warehouse_id", "=", False),
                 ],
                 limit=1,
             )
