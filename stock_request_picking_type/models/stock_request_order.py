@@ -9,6 +9,8 @@ class StockRequestOrder(models.Model):
 
     @api.model
     def _get_default_picking_type(self):
+        companies = self._context.get("allowed_company_ids", []).copy()
+        companies.append(False)
         return (
             self.env["stock.picking.type"]
             .search(
@@ -18,12 +20,7 @@ class StockRequestOrder(models.Model):
                     (
                         "warehouse_id.company_id",
                         "in",
-                        [
-                            self.env.context.get(
-                                "company_id", self.env.company.id
-                            ),
-                            False,
-                        ],
+                        companies
                     ),
                     ("warehouse_id", "=", False),
                 ],
