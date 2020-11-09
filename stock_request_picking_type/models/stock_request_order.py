@@ -20,7 +20,7 @@ class StockRequestOrder(models.Model):
                         "in",
                         [
                             self.env.context.get(
-                                "company_id", self.env.user.company_id.id
+                                "company_id", self.env.company.id
                             ),
                             False,
                         ],
